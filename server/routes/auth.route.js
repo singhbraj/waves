@@ -4,6 +4,8 @@ const router = express.Router()
 
 
 // /api/auth/hello
-router.get('/hello',authController.hello)
+router.post('/register',authController.register)
+router.post('/signin',authController.signin)
+router.get('/isAuth',authController.isAuth)
 
 module.exports = router
