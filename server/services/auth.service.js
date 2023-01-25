@@ -1,11 +1,21 @@
+const {User} = require('../modals/user')
 
-
-const hello= async() =>{
+const createUser= async(email,password) =>{
     try{
-    return 'hello'
-    }catch(error){}
+        if(await User.emailTaken(email)){
+            console.log("email is already in DB")
+        }
+     const user = new User({
+        email,
+        password
+     })
+     await user.save()
+     return user
+    }catch(error){
+        throw error
+    }
 }
 
 module.exports = {
-    hello
+    createUser
 }

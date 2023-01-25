@@ -1,10 +1,14 @@
     const {authService}  = require('../services/index')
     const authController={
-        async register(req,res){
+        async register(req,res,next){
            try{
-               const useHello = authService.hello()
-               console.log(useHello)
-           }catch(error){}
+            const {email,password} = req.body;
+            const user = await authService.createUser(email,password)
+
+               res.status(200).send({user})
+           }catch(error){
+            console.log(error)
+           }
         },
      async signin(req,res){
         try{
