@@ -16,6 +16,12 @@ const createUser= async(email,password) =>{
     }
 }
 
+const genAuthToken = (user) =>{
+    return user.generateAuthToken()
+
+}
+
 module.exports = {
-    createUser
+    createUser,
+    genAuthToken
 }
