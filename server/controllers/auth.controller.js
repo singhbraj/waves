@@ -1,4 +1,6 @@
     const {authService}  = require('../services/index')
+
+    
     const authController={
         async register(req,res,next){
            try{
@@ -9,6 +11,7 @@
                res.cookie('x-access-token',token).status(200).send({user,token})
            }catch(error){
             console.log(error)
+            next(error)
            }
         },
      async signin(req,res){

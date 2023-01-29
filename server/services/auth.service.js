@@ -1,9 +1,11 @@
-const {User} = require('../modals/user')
+const {User} = require('../modals/user');
+const httpStatus = require('http-status');
+const {ApiError}= require('../middleware/apiError')
 
 const createUser= async(email,password) =>{
     try{
         if(await User.emailTaken(email)){
-            console.log("email is already in DB")
+            throw new ApiError(httpStatus.BAD_REQUEST,'Sorry Email Taken');
         }
      const user = new User({
         email,
