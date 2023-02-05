@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const routes = require('./routes');
-const { handleError } = require('./middleware/apiError');
+const { handleError, convertToApiError } = require('./middleware/apiError');
 require('dotenv').config()
 
 
@@ -32,7 +32,8 @@ app.use('/api',routes)
 
 
 // handle error
-
+// if the error not recognized....convert to api error 
+app.use(convertToApiError);
 app.use((err,req,res,next)=>{
     handleError(err,res)
 })
