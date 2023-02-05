@@ -76,5 +76,13 @@ userSchema.statics.emailTaken = async function(email){
 
 }
 
+
+userSchema.methods.comparePassword = async function(candidatePassword){
+    // candidatePassword = unhashed password 
+    const user = this;
+    const match = await bcrypt.compare(candidatePassword,user.password)
+    return match
+}
+
 const User = mongoose.model('User',userSchema)
 module.exports = { User }
